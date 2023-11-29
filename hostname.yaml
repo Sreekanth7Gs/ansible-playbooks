@@ -1,0 +1,13 @@
+---
+- name: Get the Hostname of the servers
+  hosts: all_servers
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Get hostname from /etc/hostname
+      ansible.builtin.shell: cat /etc/hostname
+      register: hostname_result
+
+    - name: Debug - Print hostname
+      debug:
+        msg: "Hostname is {{ hostname_result.stdout | default(inventory_hostname) }}"
