@@ -1,0 +1,25 @@
+---
+- name: Install, Update, and Remove Packages
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install the packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - nginx
+        - httpd
+
+    - name: Update the packages
+      yum:
+        name: "*"
+        state: latest
+
+    - name: Remove the packages
+      yum:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - nginx
+        - httpd
