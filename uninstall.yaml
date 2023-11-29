@@ -1,0 +1,14 @@
+---
+- name: Uninstall the mentoined package
+  hosts: localhost
+  become: true
+
+  vars:
+    package_to_uninstall: "{{ package_name }}"
+
+  tasks:
+    - name: Uninstall the package
+      yum:
+        name: "{{ package_to_uninstall }}"
+        state: absent
+

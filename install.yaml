@@ -1,0 +1,21 @@
+---
+- name: Install Software Package
+  hosts: localhost
+  become: true
+
+  vars:
+    package_name: "{{ package_var | default(omit) }}"
+    installer_file: "{{ installer_file_var | default(omit) }}"
+
+  tasks:
+    - name: Install the specified package by name
+      yum:
+        name: "{{ package_name }}"
+        state: present
+      when: package_name is defined and package_name != omit
+
+    - name: Install the specified package using an installer file
+      command: "sh {{ installer_file }}"
+      args:
+        chdir: "{{ playbook_dir }}"
+      when: installer_file is defined and installer_file != omit
