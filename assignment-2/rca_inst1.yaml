@@ -4,7 +4,7 @@
   become: true
   tasks:
     - name: Collect CPU, Memory, Storage, Open files, list, Syslog of server
-      ansible.builtin.shell: |
+      command: |
         echo "CPU usage: $(top -bn 1 | awk '/^%Cpu/ {print $2}')"
         echo "--------------------------------------------------"
 
@@ -24,7 +24,7 @@
       register: server_details
 
     - name: Save the details in CSV file
-      ansible.builtin.copy:
+      copy:
         content: "{{ server_details.stdout_lines | join('\n') }}"
         dest: "/opt/details.csv"
-        remote_src: yes
+       
