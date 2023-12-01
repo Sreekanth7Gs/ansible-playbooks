@@ -4,9 +4,14 @@
   become: true
   tasks:
     - name: Collect CPU, Memory, Storage, Open files, list, Syslog of server
+<<<<<<< HEAD
       shell: |
         echo "Total CPU: $(top -bn 1 | grep 'Cpu(s)' | awk '{print $2}' | cut -d '%' -f1) %"
         echo "CPU usage: $(top -bn 1 | grep 'Cpu(s)' | awk '{print $4}' | cut -d '%' -f1) %"
+=======
+      command: |
+        echo "CPU usage: $(top -bn 1 | awk '/^%Cpu/ {print $2}')"
+>>>>>>> 7d62889168662327d4de370893f449aeb0a36529
         echo "--------------------------------------------------"
         echo "Total Memory: $(free -m | awk '/^Mem:/ {print $2}') MB"
         echo "Used Memory: $(free -m | awk '/^Mem:/ {print $3}') MB"
@@ -22,6 +27,7 @@
         echo "------------------------------------------------"
       register: server_details
 
+<<<<<<< HEAD
     - name: Save Server Details in a CSV file
       copy:
         content: "{{ server_details.stdout | join('\n') }}"
@@ -35,3 +41,10 @@
       copy:
         content: "{{ syslog_details.stdout }}"
         dest: "/opt/syslog_details-1.csv"
+=======
+    - name: Save the details in CSV file
+      copy:
+        content: "{{ server_details.stdout_lines | join('\n') }}"
+        dest: "/opt/details.csv"
+       
+>>>>>>> 7d62889168662327d4de370893f449aeb0a36529
