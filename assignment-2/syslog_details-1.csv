@@ -1,0 +1,20 @@
+-- Logs begin at Tue 2023-11-28 05:23:14 UTC, end at Fri 2023-12-01 09:35:44 UTC. --
+Dec 01 06:36:41 localhost systemd-journal[1031]: Runtime journal is using 5.9M (max allowed 47.6M, trying to leave 71.4M free of 470.3M available → current limit 47.6M).
+Dec 01 06:36:41 localhost kernel: Linux version 5.10.199-190.747.amzn2.x86_64 (mockbuild@ip-10-0-58-118) (gcc10-gcc (GCC) 10.5.0 20230707 (Red Hat 10.5.0-1), GNU ld version 2.35.2-9.amzn2.0.1) #1 SMP Sat Nov 4 16:55:14 UTC 2023
+Dec 01 06:36:41 localhost kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-5.10.199-190.747.amzn2.x86_64 root=UUID=c0d00a55-c076-43f5-be5d-925162cb3c2e ro console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 nvme_core.io_timeout=4294967295 rd.emergency=poweroff rd.shell=0
+Dec 01 06:36:41 localhost kernel: KASLR disabled
+Dec 01 06:36:41 localhost kernel: BIOS-provided physical RAM map:
+Dec 01 06:36:41 localhost kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009dfff] usable
+Dec 01 06:36:41 localhost kernel: BIOS-e820: [mem 0x000000000009e000-0x000000000009ffff] reserved
+Dec 01 06:36:41 localhost kernel: BIOS-e820: [mem 0x00000000000e0000-0x00000000000fffff] reserved
+Dec 01 06:36:41 localhost kernel: BIOS-e820: [mem 0x0000000000100000-0x000000003fffffff] usable
+Dec 01 06:36:41 localhost kernel: BIOS-e820: [mem 0x00000000fc000000-0x00000000ffffffff] reserved
+Dec 01 06:36:41 localhost kernel: NX (Execute Disable) protection: active
+Dec 01 06:36:41 localhost kernel: SMBIOS 2.7 present.
+Dec 01 06:36:41 localhost kernel: DMI: Xen HVM domU, BIOS 4.11.amazon 08/24/2006
+Dec 01 06:36:41 localhost kernel: Hypervisor detected: Xen HVM
+Dec 01 06:36:41 localhost kernel: Xen version 4.11.
+Dec 01 06:36:41 localhost kernel: Xen Platform PCI: I/O protocol version 1
+Dec 01 06:36:41 localhost kernel: Netfront and the Xen platform PCI driver have been compiled for this kernel: unplug emulated NICs.
+Dec 01 06:36:41 localhost kernel: Blkfront and the Xen platform PCI driver have been compiled for this kernel: unplug emulated disks.
+                                  You might have to change the root device
