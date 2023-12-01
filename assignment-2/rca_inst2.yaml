@@ -1,0 +1,37 @@
+---
+- name: Collect Server Details
+  hosts: instance-2
+  become: true
+  tasks:
+    - name: Collect CPU, Memory, Storage, Open files, list, Syslog of server
+      shell: |
+        echo "Total CPU: $(top -bn 1 | grep 'Cpu(s)' | awk '{print $2}' | cut -d '%' -f1) %"
+        echo "CPU usage: $(top -bn 1 | grep 'Cpu(s)' | awk '{print $4}' | cut -d '%' -f1) %"
+        echo "--------------------------------------------------"
+        echo "Total Memory: $(free -m | awk '/^Mem:/ {print $2}') MB"
+        echo "Used Memory: $(free -m | awk '/^Mem:/ {print $3}') MB"
+        echo "--------------------------------------------------"
+        echo "Total Storage: $(df -h / | awk '/\// {print $2}')"
+        echo "Used Storage: $(df -h / | awk '/\// {print $3}')"
+        echo "Storage Available: $(df -h / | awk '/\// {print $4}')"
+        echo "-------------------------------------------------"
+        echo "Open files count: $(lsof | wc -l)"
+        echo "------------------------------------------------"
+        echo "Top 5 Processes:"
+        ps aux --sort=-%cpu | awk 'NR <= 6 && NR > 1 {print $1 "," $2 "," $3 "," $4 "," $11}'
+        echo "------------------------------------------------"
+      register: server_details
+
+    - name: Save Server Details in a CSV file
+      copy:
+        content: "{{ server_details.stdout | join('\n') }}"
+        dest: "/opt/server_details-2.csv"
+
+    - name: Get Syslogs from the last 3 hours
+      shell: "journalctl --since '3 hours ago' | head -n 20"
+      register: syslog_details
+
+    - name: Save Syslogs in a CSV file
+      copy:
+        content: "{{ syslog_details.stdout }}"
+        dest: "/opt/syslog_details-2.csv"

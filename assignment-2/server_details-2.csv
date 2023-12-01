@@ -1,0 +1,19 @@
+Total CPU: 0.0 %
+CPU usage: 0.0 %
+--------------------------------------------------
+Total Memory: 952 MB
+Used Memory: 82 MB
+--------------------------------------------------
+Total Storage: 8.0G
+Used Storage: 1.8G
+Storage Available: 6.3G
+-------------------------------------------------
+Open files count: 1990
+------------------------------------------------
+Top 5 Processes:
+root,5188,0.6,0.9,sshd:
+ec2-user,5222,0.5,0.5,sshd:
+root,1,0.0,0.5,/usr/lib/systemd/systemd
+root,2,0.0,0.0,[kthreadd]
+root,3,0.0,0.0,[rcu_gp]
+------------------------------------------------

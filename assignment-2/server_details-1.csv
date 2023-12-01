@@ -1,0 +1,20 @@
+
+Total CPU: 0.0 %
+CPU usage: 6.2 %
+--------------------------------------------------
+Total Memory: 952 MB
+Used Memory: 76 MB
+--------------------------------------------------
+Total Storage: 8.0G
+Used Storage: 2.4G
+Storage Available: 5.7G
+-------------------------------------------------
+Open files count: 1989
+------------------------------------------------
+Top 5 Processes:
+root,11872,8.0,1.6,/usr/bin/python
+root,11873,3.0,0.2,/bin/sh
+root,11704,0.3,0.8,sshd:
+ec2-user,11706,0.3,0.5,sshd:
+root,1,0.0,0.5,/usr/lib/systemd/systemd
+------------------------------------------------
