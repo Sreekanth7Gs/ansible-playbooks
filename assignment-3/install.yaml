@@ -4,18 +4,48 @@
   become: true
 
   vars:
-    package_name: "{{ package_var | default(omit) }}"
-    installer_file: "{{ installer_file_var | default(omit) }}"
+    package_to_install: "{{ package_name | default(omit) }}"
+    rpm_file_to_install: "{{ rpm_file | default(omit) }}"
 
   tasks:
-    - name: Install the specified package by name
-      yum:
-        name: "{{ package_name }}"
-        state: present
-      when: package_name is defined and package_name != omit
+    - name: Check if either package_name or rpm_file is provided
+      assert:
+        that:
+          - rpm_file_to_install is defined or package_to_install is defined
+        fail_msg: "Please provide either 'package_name' or 'rpm_file' as command-line arguments."
 
-    - name: Install the specified package using an installer file
-      command: "sh {{ installer_file }}"
-      args:
-        chdir: "{{ playbook_dir }}"
-      when: installer_file is defined and installer_file != omit
+    - name: Prompt user if both package_name and rpm_file are undefined
+      pause:
+        prompt: "Please provide either 'package_name' or 'rpm_file' to proceed"
+      when: rpm_file_to_install == omit and package_to_install == omit
+
+    - name: Install the package
+      yum:
+        name: "{{ package_to_install }}"
+        state: present
+      when: rpm_file_to_install == omit
+
+    - name: Install package through rpm file
+      yum:
+        name: "{{ rpm_file_to_install }}"
+        state: present
+      when: package_to_install == omit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
