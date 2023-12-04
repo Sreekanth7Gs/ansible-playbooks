@@ -10,4 +10,9 @@
 
     - name: Debug - Print hostname
       debug:
-        msg: "Hostname is {{ hostname_result.stdout | default(inventory_hostname) }}"
+        msg: "Hostname is {{ hostname_result.stdout }}"
+    
+    - name: Store the hostnames of the servers in .csv file
+      copy:
+        - src: hostname_result.stdout
+        - dest: localhost/opt/hostnames.csv 
