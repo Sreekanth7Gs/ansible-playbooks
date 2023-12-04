@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 - name: Collect Server Details
   hosts: instance-2
@@ -25,7 +24,7 @@
 
     - name: Save Server Details in a CSV file
       copy:
-        content: "{{ server_details.stdout | join('\n') }}"
+        content: "{{ server_details.stdout_lines | join('\n') }}"
         dest: "/opt/server_details-2.csv"
 
     - name: Get Syslogs from the last 3 hours
@@ -36,35 +35,3 @@
       copy:
         content: "{{ syslog_details.stdout }}"
         dest: "/opt/syslog_details-2.csv"
-=======
----
-- name: Collect Server Details
-  hosts: instance-2
-  become: true
-  tasks:
-    - name: Collect CPU, Memory, Storage, Open files, list, Syslog of server
-      command: |
-        echo "CPU usage: $(top -bn 1 | awk '/^%Cpu/ {print $2}')"
-        echo "--------------------------------------------------"
-
-        echo "Memory usage: $(free -m | awk '/^Mem:/ {print int($3/$2 * 100)}')"
-        echo "--------------------------------------------------"
-
-        echo "Storage: $(df -h / | awk '/\// {print $5}')"
-        echo "-------------------------------------------------"
-
-        echo "Open files count: $(lsof | wc -l)"
-        echo "------------------------------------------------"
-
-        echo "Process list: $(ps aux)"
-        echo "------------------------------------------------"
-
-        echo "Syslogs: $(cat /var/log/syslog /var/log/messages /var/log/auth.log 2>/dev/null | tail -n 4)"
-      register: server_details
-
-    - name: Save the details in CSV file
-      copy:
-        content: "{{ server_details.stdout_lines | join('\n') }}"
-        dest: "/opt/details.csv"
-       
->>>>>>> 7d62889168662327d4de370893f449aeb0a36529
